@@ -1,0 +1,24 @@
+express rate limit
+
+const limiter = rateLimit({
+	windowMs: 60 * 60 * 1000, // 1 hour
+	limit: 5, // Limit each IP to 5 create account requests per `window` (here, per hour)
+	message:
+		'Too many accounts created from this IP, please try again after an hour',
+	standardHeaders: 'draft-7', // draft-6: `RateLimit-*` headers; draft-7: combined `RateLimit` header
+	legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+});
+
+app.use(limiter);
+
+1.app.set('trust proxy', 1) and app.set('trust proxy', true). Both settings same
+
+trust proxy 0 means that there is no trust in any proxies.
+trust proxy 1 trusts the immediate proxy.
+trust proxy 2 trusts two proxies and looks at the second-to-last header for the client's IP.
+
+
+2.standardHeaders =true && legacyHeaders =true
+It's possible that standardHeaders or legacyHeaders could be introduced in newer versions of the express-rate-limit package or in a different rate-limiting library, but as of my last update, these specific options were not standard features within the express-rate-limit middleware.
+
+ 
